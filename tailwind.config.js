@@ -21,6 +21,7 @@ module.exports = {
       },
       fontFamily: {
         elegant: ['"Playfair Display"', "serif"],
+        sans: ['Poppins', 'sans-serif'],
       },
     },
   },
