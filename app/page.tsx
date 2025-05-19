@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import StatsSection from "./components/StatsSection";
 import servicesData from "./servicesData.json";
+import emailjs from "emailjs-com";
 import ServicesSection from "./components/Services";
 export default function Home() {
   const [userType, setUserType] = useState("");
@@ -204,22 +205,67 @@ export default function Home() {
       <StatsSection />
 
       <section id="contact" className="py-20 px-4 md:px-6 bg-white text-center font-sans">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <h3 className="text-3xl md:text-4xl font-semibold mb-4">Contact Us</h3>
-          <form className="max-w-3xl mx-auto space-y-4 text-left">
-            <select value={userType} onChange={(e) => setUserType(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-md">
-              <option value="">I am a...</option>
-              <option value="publisher">Publisher</option>
-              <option value="advertiser">Advertiser</option>
-            </select>
-            <input type="text" placeholder="Name" className="w-full px-4 py-3 border border-gray-300 rounded-md" />
-            <input type="email" placeholder="Email" className="w-full px-4 py-3 border border-gray-300 rounded-md" />
-            <input type="text" placeholder="Phone Number" className="w-full px-4 py-3 border border-gray-300 rounded-md" />
-            <textarea placeholder="Your Message" rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-md"></textarea>
-            <button type="submit" className="bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700">Send Message</button>
-          </form>
-        </motion.div>
-      </section>
+  <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+    <h3 className="text-3xl md:text-4xl font-semibold mb-4">Contact Us</h3>
+    <form
+      className="max-w-3xl mx-auto space-y-4 text-left"
+      onSubmit={(e) => {
+        e.preventDefault();
+        emailjs
+          .sendForm(
+            "service_gp5d5ln", // Replace with your EmailJS service ID
+            "template_407oyq8", // Replace with your EmailJS template ID
+            e.target as HTMLFormElement,
+            "1a6kCqz97xf5lqTMc" // Replace with your EmailJS user ID
+          )
+          .then(
+            (result) => {
+              alert("Message sent successfully!");
+            },
+            (error) => {
+              alert("Failed to send message. Please try again.");
+            }
+          );
+      }}
+    >
+      <select name="user_type" className="w-full px-4 py-3 border border-gray-300 rounded-md">
+        <option value="">I am a...</option>
+        <option value="publisher">Publisher</option>
+        <option value="advertiser">Advertiser</option>
+      </select>
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        required
+      />
+      <input
+        type="text"
+        name="phone"
+        placeholder="Phone Number"
+        className="w-full px-4 py-3 border border-gray-300 rounded-md"
+      />
+      <textarea
+        name="message"
+        placeholder="Your Message"
+        rows={5}
+        className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        required
+      ></textarea>
+      <button type="submit" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-purple-700">
+        Send Message
+      </button>
+    </form>
+  </motion.div>
+</section>
 
       <section id="join" className="py-20 px-4 md:px-6 bg-gray-50 text-center font-sans">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
@@ -254,7 +300,7 @@ export default function Home() {
           <div>
             <h4 className="text-xl md:text-2xl font-bold mb-4">Contact</h4>
             <p>Email: hello@avengersmedia.com</p>
-            <p>Phone: +1 234 567 890</p>
+            <p>Phone: +1 1111 11 111 1</p>
           </div>
         </div>
         <div className="border-t border-white/30 mt-8 pt-6 text-center text-sm">

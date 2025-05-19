@@ -1,29 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, X } from 'lucide-react';
+import { Activity, Settings, BarChart4, MessageCircle } from 'lucide-react';
 
-// Utility function to combine class names
 function cn(...args: any[]): string {
-    let className = "";
-    for (let arg of args) {
-        if (typeof arg === "string") {
-            className += arg + " ";
-        } else if (typeof arg === "object" && arg !== null) {
-            if (Array.isArray(arg)) {
-                for (let subArg of arg) {
-                    if (subArg) {
-                        className += subArg + " ";
-                    }
-                }
-            } else {
-                for (let key in arg) {
-                    if (arg[key]) {
-                        className += key + " ";
-                    }
-                }
-            }
-        }
-    }
-    return className.trim();
+    return args.filter(Boolean).join(' ');
 }
 
 interface CardProps {
@@ -62,8 +43,10 @@ const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, 
             />
 
             {/* Circular Icon */}
-            <div className="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center">
-                <div style={{ color: color }}>{icon}</div>
+            <div className="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
+                 style={{ backgroundColor: `${color}1A`, color: color }}
+            >
+                {icon}
             </div>
 
             {/* Title */}
@@ -77,7 +60,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, 
                 className={cn(
                     "text-sm font-medium transition-colors duration-200 flex items-center gap-1 w-fit cursor-pointer",
                     `text-[${color}] hover:text-[${color}]/80`,
-                    "flex items-center" // Added to align arrow
+                    "flex items-center"
                 )}
             >
                 Read more →
@@ -92,15 +75,21 @@ const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, 
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.3 }}
                         className={cn(
-                            "absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-md rounded-xl p-6 flex flex-col text-white z-10 overflow-y-auto max-h-[80vh]"
-                        )}  
-                        style={
-                            { backgroundColor: `${color}1A` } as React.CSSProperties
-                        }
+                            "absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-md rounded-xl p-6 flex flex-col text-white z-10 overflow-y-auto max-h-[80vh]",
+                            "bg-gray-900" // Added background color to the modal
+                        )}
                     >
-                        <div className="bg-[var(--background-color)] rounded-xl p-6 shadow-xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{title}</h2>
-                            <p className="text-gray-200 leading-relaxed whitespace-pre-line">{fullDescription}</p>
+                        <div className=" rounded-xl p-6 shadow-xl">
+                            <div className="flex justify-between items-start mb-4"> {/* added flex...items-start */}
+                                <h2 className="text-2xl font-semibold  text-white">{title}</h2>
+                                <button
+                                    onClick={toggleOpen}
+                                    className="text-gray-400 hover:text-white mt-0" //Added mt-0
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+                            <p className="text-gray-300 leading-relaxed whitespace-pre-line">{fullDescription}</p> {/* changed to text-gray-300 */}
                             <button
                                 onClick={toggleOpen}
                                 className="mt-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md self-start"

@@ -149,9 +149,9 @@ const ServicesSection = () => {
             <div className="mt-12 flex justify-center"> {/* Centered the button */}
                 <button
                     onClick={handleHireUsClick}
-                    className="px-6 py-3 rounded-xl bg-pink-600 text-white font-semibold shadow-md hover:bg-pink-700 transition-all flex items-center gap-2"
+                    className="px-6 py-3 rounded-xl bg-pink-400 text-white font-semibold shadow-md hover:bg-pink-500 transition-all flex items-center gap-2"
                 >
-                    Hire Us Today
+                    Contact Today
                     <ArrowRight className="w-5 h-5" />
                 </button>
             </div>
