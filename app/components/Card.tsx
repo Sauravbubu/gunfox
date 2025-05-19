@@ -94,9 +94,9 @@ const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, 
                         className={cn(
                             "absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-md rounded-xl p-6 flex flex-col text-white z-10 overflow-y-auto max-h-[80vh]"
                         )}  
-                        style={{
-                            "--background-color": `${color}1A`,
-                        }}
+                        style={
+                            { backgroundColor: `${color}1A` } as React.CSSProperties
+                        }
                     >
                         <div className="bg-[var(--background-color)] rounded-xl p-6 shadow-xl">
                             <h2 className="text-2xl font-semibold mb-4 text-white">{title}</h2>
