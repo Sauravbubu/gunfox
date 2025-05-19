@@ -1,23 +1,27 @@
 
     [
-    {
-      "title": "Performance Marketing",
-      "desc": "Strategically deliver outcomes with models like CPA, CPL, CPI, and CPM to drive installs, leads, or sales."
-    },
-    {
-      "title": "Campaign Intelligence",
-      "desc": "Track KPIs in real-time with dynamic insights and post-event analytics to enhance campaign efficiency."
-    },
-    {
-      "title": "Fraud Prevention",
-      "desc": "Advanced tools that instantly detect and eliminate invalid traffic, securing your marketing spend."
-    },
-    {
-      "title": "Mobile Reach",
-      "desc": "Connect globally with targeted mobile campaigns that drive app engagement and brand loyalty."
-    },
-    {
-      "title": "Custom Platforms",
-      "desc": "Use real-time dashboards and segmentation to optimize audiences and transfer data across channels."
-    }
+      {
+        "title": "Performance Marketing",
+        "desc": "Tailored to meet individual needs perfectly balanced.",
+        "icon": "🧠",
+        "iconBg": "bg-pink-500"
+      },
+      {
+        "title": "Campaign Intelligence",
+        "desc": "Tailored to meet individual needs perfectly balanced.",
+        "icon": "📊",
+        "iconBg": "bg-green-500"
+      },
+      {
+        "title": "Fraud Prevention",
+        "desc": "Tailored to meet individual needs perfectly balanced.",
+        "icon": "🛡️",
+        "iconBg": "bg-violet-500"
+      },
+      {
+        "title": "24/7 Support",
+        "desc": "Tailored to meet individual needs perfectly balanced.",
+        "icon": "🧑‍💻",
+        "iconBg": "bg-orange-500"
+      }
   ]

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import StatsSection from "./components/StatsSection";
 import servicesData from "./servicesData.json";
+import ServicesSection from "./components/Services";
 export default function Home() {
   const [userType, setUserType] = useState("");
   const [isDarkBackground, setIsDarkBackground] = useState(false);
@@ -19,39 +20,129 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Use the improved AdvertiserSection and PublisherSection
+    const AdvertiserSection = () => (
+        <section id="advertiser" className="py-16 md:py-24 px-4 md:px-6 bg-white text-center font-sans">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="space-y-4 md:space-y-6"
+            >
+              <h3 className="text-3xl md:text-4xl font-semibold text-blue-600">Advertiser</h3>
+              <p className="text-base md:text-lg text-gray-700 max-w-4xl mx-auto">
+                Partner with Avengers Media for future-ready marketing. We invest in robust tech and media channels to connect you with high-intent audiences. Our continuous innovation in platforms and models ensures your brand remains competitive and impactful.
+              </p>
+               <div className="mt-8">
+                <button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+                    Get Started
+                </button>
+               </div>
+            </motion.div>
+          </div>
+        </section>
+    );
+
+    const PublisherSection = () => (
+      <section id="publisher" className="py-16 md:py-24 px-4 md:px-6 bg-gray-50 font-sans">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Animation on the Left (for demonstration purposes) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="flex items-center justify-center" // Center content in the left column
+          >
+              {/* Replace this with your actual animation or image */}
+              <div className="w-full max-w-[400px] h-auto">
+                {/* Placeholder Illustration - Replace with a more relevant image */}
+                <img
+                  src="https://images.unsplash.com/photo-1580829336415-591c5488ba04?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Marketing and Growth Illustration"
+                  className="rounded-lg shadow-lg"
+                />
+              </div>
+          </motion.div>
+  
+          {/* Publisher Content on the Right */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+            className="text-center md:text-left space-y-6"
+          >
+            <h3 className="text-3xl md:text-4xl font-semibold text-green-600">Publisher</h3>
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl">
+              Why choose Avengers Media as your monetization partner?
+            </p>
+            <div className="">
+              <ul className="list-none pl-0 space-y-4 text-gray-700 text-sm md:text-base">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 h-5 w-5 rounded-full bg-green-500 flex-shrink-0"></span>
+                  <span>Access to worldwide campaigns with substantial budgets</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 h-5 w-5 rounded-full bg-green-500 flex-shrink-0"></span>
+                  <span>Integrated MMP tracking for all campaigns</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 h-5 w-5 rounded-full bg-green-500 flex-shrink-0"></span>
+                  <span>Prompt validation and timely payments</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 h-5 w-5 rounded-full bg-green-500 flex-shrink-0"></span>
+                  <span>24/7 assistance via team, email, and calls</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 h-5 w-5 rounded-full bg-green-500 flex-shrink-0"></span>
+                  <span>Flexible and convenient payment terms</span>
+                </li>
+              </ul>
+             </div>
+              <div className="mt-8">
+                  <button className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+                      Partner With Us
+                  </button>
+              </div>
+          </motion.div>
+        </div>
+      </section>
+      );
+  
+
+
   return (
     <>
       <header className="fixed top-0 left-0 w-full bg-white/10 backdrop-blur-md z-50 shadow-lg">
-       <nav className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex flex-wrap justify-between items-center font-sans">
-  <div className="px-3 py-1">
-    <img
-      src={isDarkBackground ? "/avengers_media_black_text.png" : "/avengers_media_white_text.png"}
-      alt="Logo"
-      className="h-8 md:h-10 w-auto transition duration-300"
-    />
-  </div>
+        <nav className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex flex-wrap justify-between items-center font-sans">
+          <div className="px-3 py-1">
+            <img
+              src={isDarkBackground ? "/avengers_media_black_text.png" : "/avengers_media_white_text.png"}
+              alt="Logo"
+              className="h-8 md:h-10 w-auto transition duration-300"
+            />
+          </div>
 
-  {/* Hamburger button for mobile */}
-  <button
-    onClick={() => setMenuOpen(!menuOpen)}
-    className="md:hidden text-white focus:outline-none"
-    aria-label="Toggle menu"
-  >
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      {menuOpen ? (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-      ) : (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-      )}
-    </svg>
-  </button>
+          {/* Hamburger button for mobile */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-white focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              {menuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
 
-  <div
-    className={`w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 flex flex-col md:flex-row md:items-center text-[17px] font-medium tracking-wide ${
-      isDarkBackground ? "text-gray-800" : "text-white"
-    } ${menuOpen ? "flex" : "hidden"} md:flex`}
-  >
-  <a href="#" className="hover:text-gray-300 transition">Home</a>
+          <div
+            className={`w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 flex flex-col md:flex-row md:items-center text-[17px] font-medium tracking-wide ${isDarkBackground ? "text-gray-800" : "text-white"} ${menuOpen ? "flex" : "hidden"} md:flex`}
+          >
+            <a href="#" className="hover:text-gray-300 transition">Home</a>
             <a href="#about" className="hover:text-gray-300 transition">About</a>
             <a href="#services" className="hover:text-gray-300 transition">Services</a>
             <a href="#advertiser" className="hover:text-gray-300 transition">Advertiser</a>
@@ -63,8 +154,8 @@ export default function Home() {
             >
               Join Us
             </a>
-  </div>
-</nav>
+          </div>
+        </nav>
 
       </header>
 
@@ -104,48 +195,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-4 md:px-6 bg-gray-50 text-center font-sans">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <h3 className="text-3xl md:text-4xl font-semibold mb-10 md:mb-12">Our Services</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-            {servicesData.map((service, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.05 }}
-                className="p-5 rounded-xl bg-white shadow-sm border border-gray-200"
-              >
-                <h4 className="text-lg md:text-xl font-semibold mb-2">{service.title}</h4>
-                <p className="text-gray-600 text-sm md:text-base">{service.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+      <ServicesSection />
 
-      <section id="advertiser" className="py-20 px-4 md:px-6 bg-white text-center font-sans">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <h3 className="text-3xl md:text-4xl font-semibold mb-4">Advertiser</h3>
-          <p className="text-base md:text-lg text-gray-700 max-w-4xl mx-auto">
-            Partner with Avengers Media for future-ready marketing. We invest in robust tech and media channels to connect you with high-intent audiences. Our continuous innovation in platforms and models ensures your brand remains competitive and impactful.
-          </p>
-        </motion.div>
-      </section>
+      <AdvertiserSection />
 
-      <section id="publisher" className="py-20 px-4 md:px-6 bg-gray-50 text-center font-sans">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-          <h3 className="text-3xl md:text-4xl font-semibold mb-4">Publisher</h3>
-          <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto mb-6">
-            Why choose Avengers Media as your monetization partner?
-          </p>
-          <ul className="text-left max-w-2xl mx-auto space-y-3 text-gray-700 list-disc pl-5 text-sm md:text-base">
-            <li>Access to worldwide campaigns with substantial budgets</li>
-            <li>Integrated MMP tracking for all campaigns</li>
-            <li>Prompt validation and timely payments</li>
-            <li>24/7 assistance via team, email, and calls</li>
-            <li>Flexible and convenient payment terms</li>
-          </ul>
-        </motion.div>
-      </section>
+      <PublisherSection />
 
       <StatsSection />
 
