@@ -2,7 +2,7 @@ import { Activity, ArrowRight, BarChart4, MessageCircle, Settings } from "lucide
 import { useState, useEffect } from "react";
 import Card from "./Card";
 import AnimatedMulticolorText from "./AnimatedMultiColorText";
-import { sendtoForm } from "../page";
+
 function cn(...args: any[]): string {
   return args.filter(Boolean).join(' ');
 }
@@ -10,6 +10,7 @@ function cn(...args: any[]): string {
 interface ServicesSectionProps {
   isDarkMode: boolean;
 }
+
     const servicesData = [
     {
       icon: <Activity className="w-6 h-6" />, // Color will be applied by parent
@@ -51,6 +52,9 @@ interface ServicesSectionProps {
 export default function ServicesSection({ isDarkMode }: ServicesSectionProps) {
   
   const [openReadMoreIndex, setOpenReadMoreIndex] = useState<number | null>(null);
+ const sendtoForm = () => {
+  window.location.href = '#contact';
+};
 
  useEffect(() => {
   let lastScrollY = window.scrollY;

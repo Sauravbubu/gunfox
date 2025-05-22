@@ -18,9 +18,6 @@ import Header from "./components/Header";
 import AdvertiserSection from "./components/Advertiser";
 import PublisherSection from "./components/Publisher";
 import StatsSection from "./components/StatsSection";
-export const sendtoForm = () => {
-  window.location.href = '#contact';
-};
 
 // Utility function (from previous user provided code)
 function cn(...args: any[]): string {
@@ -32,46 +29,25 @@ function cn(...args: any[]): string {
 
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for theme toggle
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+  const sendtoForm = () => {
+    window.location.href = '#contact';
   };
 
   return (
     <>
-      {/* Header Section */}
-      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-
-      {/* Hero Section */}  
+      <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
       <HeroSection />
-
-      {/* About Us Section */}
-      <AboutSection
-        isDarkMode={isDarkMode}
-      />
-
-      {/* Services Section */}
+      <AboutSection isDarkMode={isDarkMode} />
       <ServicesSection isDarkMode={isDarkMode} />
-
-      {/* Advertiser Section */}
-      <AdvertiserSection isDarkMode={isDarkMode} sendtoForm={sendtoForm}/>
-
-      {/* Publisher Section */}
-      <PublisherSection sendtoForm={sendtoForm} isDarkMode={isDarkMode} />
-
-      {/* Stats Section */}
+      <AdvertiserSection isDarkMode={isDarkMode} sendtoForm={sendtoForm} />
+      <PublisherSection isDarkMode={isDarkMode} sendtoForm={sendtoForm} />
       <StatsSection isDarkMode={isDarkMode} />
-
-      {/* Contact Section */}
       <ContactSection isDarkMode={isDarkMode} />
-
-      {/* Join us Section */}
       <JoinUsSection isDarkMode={isDarkMode} sendtoForm={sendtoForm} />
-      
-      {/* Footer Section */}
       <FooterSection isDarkMode={isDarkMode} />
-
     </>
   );
 }
+
