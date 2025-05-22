@@ -8,6 +8,7 @@ import { Activity, Settings, BarChart4, MessageCircle } from 'lucide-react';
 import CountUp from "react-countup"; // Added for StatsSection
 import { useInView } from "react-intersection-observer"; // Added for StatsSection
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import HeroSection from "./HeroSection";
 const sendtoForm = () => {
   window.location.href = '#contact';
 };
@@ -68,33 +69,30 @@ const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, 
       {/* Title */}
       <h2 className={cn(
         "text-xl font-semibold mt-16 mb-2 relative",
-        isDarkMode ? "text-white" : "text-white", // Text color for title
-        "drop-shadow-lg",
-        "text-shadow-sm",
-        isDarkMode ? "bg-white/5 backdrop-blur-sm rounded-md px-2 py-1" : "bg-white/10 backdrop-blur-md rounded-md px-2 py-1"
+        "text-white drop-shadow-lg text-shadow-sm",
+        "bg-black/60 backdrop-blur-sm rounded-md px-2 py-1"
       )}>
         {title}
       </h2>
-      {/* Description */}
       <p className={cn(
         "text-sm mb-4 relative",
-        isDarkMode ? "text-gray-300 bg-white/5 backdrop-blur-sm rounded-md px-2 py-1" : "text-gray-300 bg-white/10 backdrop-blur-md rounded-md px-2 py-1"
+        "bg-black/50 backdrop-blur-sm rounded-md px-2 py-1",
+        isDarkMode ? "text-gray-200" : "text-gray-200"
       )}>
         {description}
       </p>
-
-      {/* Read More Link */}
       <button
         onClick={() => setIsOpen(true)}
         style={{ color: color }}
         className={cn(
           "text-sm font-medium transition-colors duration-200 flex items-center gap-1 w-fit cursor-pointer hover:opacity-80 mt-auto",
-          isDarkMode ? "bg-white/5 backdrop-blur-sm rounded-md px-2 py-1" : "bg-white/10 backdrop-blur-md rounded-md px-2 py-1"
+          "bg-black/40 text-white backdrop-blur-sm rounded-md px-2 py-1"
         )}
       >
         Read more
         <ArrowRight className="w-4 h-4 ml-1" />
       </button>
+
 
       {/* Full Description Modal */}
       <AnimatePresence>
@@ -177,7 +175,7 @@ const AnimatedMulticolorText = ({ text, isDarkMode }: { text: string; isDarkMode
 };
 
 // ServicesSection Component (from previous user provided code)
-const ServicesSection = ({ isDarkMode }) => {
+const ServicesSection: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
   const servicesData = [
     {
       icon: <Activity className="w-6 h-6" />, // Color will be applied by parent
@@ -265,7 +263,7 @@ const ServicesSection = ({ isDarkMode }) => {
 };
 
 // StatsSection Component (from previous user provided code)
-const StatsSection = ({ isDarkMode }) => {
+const StatsSection: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -398,13 +396,13 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "linear" }}
           className="flex items-center justify-center" // Center content in the left column
         >
           {/* Placeholder Illustration - Replace with a more relevant image */}
-          <div className="w-full max-w-[400px] h-auto">
+          <div className="w-full max-w-[500px] h-auto">
             <img
-              src="https://images.unsplash.com/photo-1580829336415-591c5488ba04?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="./publisher.png" // Placeholder image
               alt="Marketing and Growth Illustration"
               className="rounded-lg shadow-lg"
             />
@@ -459,18 +457,17 @@ export default function Home() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 shadow-lg transition-colors duration-300 ${isDarkMode ? "bg-gray-900/80" : "bg-white/80 backdrop-blur-md"}`}>
+
+      <header className={`fixed top-0 left-0 w-full z-50 shadow-md transition-colors duration-300 ${isDarkMode ? "bg-gray-950/80" : "bg-white/80 backdrop-blur-md"}`}>
         <nav className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex flex-wrap justify-between items-center font-sans">
           <div className="px-3 py-1">
-            {/* Logo changes based on both scroll and dark mode */}
             <img
-              src={isDarkMode ? "/avengers_media_white_text.png" : (isDarkBackground ? "/avengers_media_black_text.png" : "/avengers_media_white_text.png")}
+              src={isDarkMode ? "/avengers_media_white_text.png" : "/avengers_media_black_text.png"}
               alt="Logo"
               className="h-8 md:h-10 w-auto transition duration-300"
             />
           </div>
 
-          {/* Hamburger button for mobile */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden focus:outline-none ${isDarkMode ? "text-white" : "text-gray-800"}`}
@@ -485,27 +482,21 @@ export default function Home() {
             </svg>
           </button>
 
-          <div
-            className={`w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 flex flex-col md:flex-row md:items-center text-[17px] font-medium tracking-wide ${isDarkMode ? "text-white" : (isDarkBackground ? "text-gray-800" : "text-white")} ${menuOpen ? "flex" : "hidden"} md:flex`}
-          >
+          <div className={`w-full md:w-auto mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-6 flex flex-col md:flex-row md:items-center text-[17px] font-medium tracking-wide ${isDarkMode ? "text-white" : "text-gray-900"} ${menuOpen ? "flex" : "hidden"} md:flex`}>
             <a href="#" className="hover:text-gray-400 transition">Home</a>
             <a href="#about" className="hover:text-gray-400 transition">About</a>
             <a href="#services" className="hover:text-gray-400 transition">Services</a>
             <a href="#advertiser" className="hover:text-gray-400 transition">Advertiser</a>
             <a href="#publisher" className="hover:text-gray-400 transition">Publisher</a>
             <a href="#contact" className="hover:text-gray-400 transition">Contact Us</a>
-            <a
-              href="#join"
-              className={`font-semibold ${isDarkMode ? "text-pink-300 hover:text-pink-200" : "text-pink-400 hover:text-pink-300"} transition`}
-            >
+            <a href="#join" className={`font-semibold ${isDarkMode ? "text-pink-300 hover:text-pink-200" : "text-pink-500 hover:text-pink-400"} transition`}>
               Join Us
             </a>
-            {/* Dark Mode Toggle Button */}
             <button
               onClick={toggleDarkMode}
               className={`ml-4 px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${isDarkMode
-                  ? "bg-gray-700 text-white hover:bg-gray-600"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                ? "bg-gray-700 text-white hover:bg-gray-600"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                 }`}
             >
               {isDarkMode ? "Light Mode" : "Dark Mode"}
@@ -513,31 +504,7 @@ export default function Home() {
           </div>
         </nav>
       </header>
-
-      {/* Main Hero Section */}
-      <section
-        className="min-h-screen flex items-center justify-center px-4 pt-32 bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg-1.svg')" }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className={`shadow-2xl rounded-3xl px-6 md:px-10 py-10 md:py-14 max-w-4xl text-center ${isDarkMode ? "bg-black/60 border border-white/10 text-white" : "bg-black/50 border border-white/10 text-white"}`}
-        >
-          <h2 className={`text-4xl md:text-6xl font-extrabold tracking-tight leading-tight bg-clip-text text-transparent ${isDarkMode ? "bg-gradient-to-r from-green-300 via-blue-400 to-purple-500" : "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"}`}>
-            Customized Growth<br />Marketing Solutions
-          </h2>
-          <p className={`mt-6 text-lg md:text-xl font-light ${isDarkMode ? "text-gray-300" : "text-gray-200"}`}>
-            Built for <span className="font-semibold text-white">Scalability</span> and <span className="font-semibold text-white">Impact</span>
-          </p>
-          <a href="#contact">
-            <button className={`mt-8 px-6 py-3 font-bold rounded-xl shadow-lg hover:shadow-xl transition duration-300 ${isDarkMode ? "bg-gradient-to-r from-purple-400 to-pink-400 text-white" : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"}`}>
-              GET A QUOTE
-            </button>
-          </a>
-        </motion.div>
-      </section>
+      <HeroSection />
 
       {/* About Us Section */}
       <section
@@ -766,8 +733,8 @@ export default function Home() {
                 name="user_type"
                 required
                 className={`w-full px-5 py-3.5 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 shadow-sm ${isDarkMode
-                    ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
-                    : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
+                  ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
+                  : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
                   }`}
                 value={userType}
                 onChange={(e) => setUserType(e.target.value)}
@@ -789,8 +756,8 @@ export default function Home() {
                 placeholder="Name"
                 required
                 className={`w-full px-5 py-3.5 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 shadow-sm ${isDarkMode
-                    ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
-                    : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
+                  ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
+                  : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
                   }`}
               />
               <input
@@ -799,8 +766,8 @@ export default function Home() {
                 placeholder="Email"
                 required
                 className={`w-full px-5 py-3.5 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 shadow-sm ${isDarkMode
-                    ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
-                    : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
+                  ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
+                  : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
                   }`}
               />
               <input
@@ -809,8 +776,8 @@ export default function Home() {
                 placeholder="Phone Number"
                 required
                 className={`w-full px-5 py-3.5 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 shadow-sm ${isDarkMode
-                    ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
-                    : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
+                  ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
+                  : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
                   }`}
               />
               <textarea
@@ -819,16 +786,16 @@ export default function Home() {
                 rows={5}
                 required
                 className={`w-full px-5 py-3.5 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 resize-none shadow-sm ${isDarkMode
-                    ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
-                    : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
+                  ? "border-gray-600 bg-gray-700/80 text-gray-100 focus:ring-blue-400 placeholder:text-gray-400"
+                  : "border-gray-300 bg-white/80 text-gray-900 focus:ring-blue-500 placeholder:text-gray-500"
                   }`}
               ></textarea>
             </div>
             <button
               type="submit"
               className={`w-full px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg font-semibold text-lg transition-all duration-300 ${isDarkMode
-                  ? "bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white"
-                  : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
+                ? "bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white"
+                : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
                 }`}
             >
               Send Message
