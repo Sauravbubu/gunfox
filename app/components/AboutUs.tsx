@@ -120,28 +120,3 @@ export default function AboutSection({ isDarkMode }: { isDarkMode: boolean }) {
   );
 }
 
-function FloatingBlob({
-  className,
-  fill,
-  transform,
-}: {
-  className: string;
-  fill: string;
-  transform?: string;
-}) {
-  return (
-    <svg className={className} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="blurFilterInner">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
-        </filter>
-      </defs>
-      <path
-        fill={fill}
-        transform={transform || 'translate(100 100)'}
-        filter="url(#blurFilterInner)"
-        d="M57.6,-57.8C72.1,-43.8,79.5,-21.9,74.7,-1.8C69.9,18.3,52.8,36.5,33.5,49.1C14.2,61.7,-7.3,68.6,-28.3,64.4C-49.3,60.2,-69.8,44.8,-76.3,23.3C-82.8,1.8,-75.4,-25.9,-60.6,-40.4C-45.9,-54.9,-23,-62.2,-0.2,-62C22.6,-61.8,45.3,-58.5,57.6,-57.8Z"
-      />
-    </svg>
-  );
-}
