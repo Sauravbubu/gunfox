@@ -8,12 +8,12 @@ import { Activity, Settings, BarChart4, MessageCircle } from 'lucide-react';
 import CountUp from "react-countup"; // Added for StatsSection
 import { useInView } from "react-intersection-observer"; // Added for StatsSection
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import HeroSection from "./HeroSection";
+import HeroSection from "./components/HeroSection";
 import ServicesSection from "./components/Services";
 import ContactSection from "./components/ContactSection";
 import JoinUsSection from "./components/JoinUsSection";
 import FooterSection from "./components/Footer";
-import AboutSection from "./AboutUs";
+import AboutSection from "./components/AboutUs";
 import Header from "./components/Header";
 import AdvertiserSection from "./components/Advertiser";
 import PublisherSection from "./components/Publisher";

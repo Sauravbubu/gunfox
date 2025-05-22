@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { Menu, X } from "lucide-react"; // example icons for menu toggle
+import { Menu, X } from "lucide-react";
 
+const menuItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Advertiser", href: "#advertiser" },
+  { label: "Publisher", href: "#publisher" },
+  { label: "Contact Us", href: "#contact" },
+  { label: "Join Us", href: "#joinus" },
+];
 const MobileMenu: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Toggle menu open/close
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  // Close menu when clicking a menu item
   const handleMenuItemClick = () => setIsMenuOpen(false);
 
   return (
@@ -26,9 +32,11 @@ const MobileMenu: React.FC = () => {
 
         {/* Desktop menu - hidden on small screens */}
         <nav className="hidden sm:flex space-x-8 text-gray-900 dark:text-white">
-          <a href="#services" className="hover:text-green-600">Services</a>
-          <a href="#about" className="hover:text-green-600">About</a>
-          <a href="#contact" className="hover:text-green-600">Contact</a>
+          {menuItems.map(({ label, href }) => (
+            <a key={href} href={href} className="hover:text-green-600">
+              {label}
+            </a>
+          ))}
         </nav>
       </div>
 
@@ -39,33 +47,17 @@ const MobileMenu: React.FC = () => {
         }`}
       >
         <ul className="flex flex-col p-4 space-y-4 text-gray-900 dark:text-white">
-          <li>
-            <a
-              href="#services"
-              onClick={handleMenuItemClick}
-              className="block px-3 py-2 rounded-md hover:bg-green-500 hover:text-white transition"
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              href="#about"
-              onClick={handleMenuItemClick}
-              className="block px-3 py-2 rounded-md hover:bg-green-500 hover:text-white transition"
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              onClick={handleMenuItemClick}
-              className="block px-3 py-2 rounded-md hover:bg-green-500 hover:text-white transition"
-            >
-              Contact
-            </a>
-          </li>
+          {menuItems.map(({ label, href }) => (
+            <li key={href}>
+              <a
+                href={href}
+                onClick={handleMenuItemClick}
+                className="block px-3 py-2 rounded-md hover:bg-green-500 hover:text-white transition"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

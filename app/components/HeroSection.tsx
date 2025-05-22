@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { content } from '../Contents/contents';
 
 function HeroSection() {
   // Define variants for the main content block animation
@@ -24,8 +25,8 @@ function HeroSection() {
   };
 
   // Split the heading text into words for individual animation
-  const headingText1 = "Affiliate Marketing".split(" ");
-  const headingText2 = "Built to Perform".split(" ");
+  const headingText1 = content.hero.title1.split(" ");
+  const headingText2 = content.hero.title2.split(" ");
 
   return (
     // The main section container, ensuring it takes at least the full screen height
@@ -78,7 +79,7 @@ function HeroSection() {
             whileTap={{ scale: 0.95 }} // Slightly shrink on tap/click
             className="mt-8 px-8 py-4 font-bold rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg"
           >
-            Get Started Now
+           {content.hero.cta}
           </motion.button>
         </motion.a>
       </motion.div>
