@@ -1,196 +1,126 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X } from 'lucide-react';
-import { Activity, Settings, BarChart4, MessageCircle } from 'lucide-react';
-
+import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, X } from "lucide-react";
 function cn(...args: any[]): string {
-    return args.filter(Boolean).join(' ');
+  return args.filter(Boolean).join(' ');
 }
 
 interface CardProps {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-    fullDescription: string;
-    readMoreLink: string;
-    index: number;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  fullDescription: string;
+  readMoreLink: string;
+  index: number;
+  bgImage: string;
+  isDarkMode: boolean;
+  isReadMoreOpen: boolean;
+  onToggleReadMore: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ icon, title, description, fullDescription, readMoreLink, index }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const colors = ['#F44336', '#4CAF50', '#3F51B5'];
-    const color = colors[index % colors.length];
+const Card: React.FC<CardProps> = ({
+  icon,
+  title,
+  description,
+  fullDescription,
+  readMoreLink,
+  index,
+  bgImage,
+  isDarkMode,
+  isReadMoreOpen,
+  onToggleReadMore,
+}) => {
+  const colors = isDarkMode
+    ? ['#EF4444', '#22C55E', '#ffec6b', '#F97316']
+    : ['#F44336', '#4CAF50', '#3F51B5', '#FF9800'];
+  const color = colors[index % colors.length];
 
-    const toggleOpen = () => {
-        setIsOpen(!isOpen);
+  // Optional: Close modal on ESC key (nice UX)
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isReadMoreOpen) {
+        onToggleReadMore();
+      }
     };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isReadMoreOpen, onToggleReadMore]);
 
-    return (
-        <div
+  return (
+    <div
+      className={cn(
+        "relative p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col min-h-[400px] overflow-hidden bg-cover bg-center",
+        isDarkMode ? "bg-black/60 border border-gray-700" : "bg-black/50 border border-white/10",
+        "backdrop-blur-md"
+      )}
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div
+        className="absolute -top-6 -left-6 w-32 h-32 rounded-full opacity-10 blur-2xl"
+        style={{ backgroundColor: `${color}1A` }}
+      />
+      <div
+        className="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
+        style={{ backgroundColor: `${color}1A`, color: color }}
+      >
+        {icon}
+      </div>
+
+      <h2
+        className={cn(
+          "text-xl font-semibold mt-16 mb-2 relative text-white drop-shadow-lg",
+          "bg-black/60 backdrop-blur-sm rounded-md px-2 py-1"
+        )}
+      >
+        {title}
+      </h2>
+      <p
+        className={cn(
+          "text-sm mb-4 relative bg-black/50 backdrop-blur-sm rounded-md px-2 py-1",
+          isDarkMode ? "text-gray-200" : "text-gray-200"
+        )}
+      >
+        {description}
+      </p>
+
+      <button
+        onClick={onToggleReadMore}
+        style={{ color: color }}
+        className={cn(
+          "text-sm font-medium transition-colors duration-200 flex items-center gap-1 w-fit cursor-pointer hover:opacity-80 mt-auto",
+          "bg-black/40 text-white backdrop-blur-sm rounded-md px-2 py-1"
+        )}
+      >
+        Read more
+        <ArrowRight className="w-4 h-4 ml-1" />
+      </button>
+
+      <AnimatePresence>
+        {isReadMoreOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
             className={cn(
-                "relative p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-lg",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-white/10",
-                "flex flex-col gap-6",
-                "overflow-hidden"
+              "absolute top-0 left-0 w-full h-full rounded-xl p-6 flex flex-col z-10",
+              isDarkMode ? "bg-black/90 backdrop-blur-lg text-white" : "bg-black/95 backdrop-blur-md text-white"
             )}
-        >
-            {/* Circular Cutout Shape */}
-            <div
-                className="absolute top-0 left-0 w-24 h-24 bg-transparent rounded-full -translate-x-1/4 -translate-y-1/4"
-                style={{
-                    backgroundColor: `${color}1A`,
-                }}
-            />
-
-            {/* Circular Icon */}
-            <div className="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
-                 style={{ backgroundColor: `${color}1A`, color: color }}
-            >
-                {icon}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-lg font-semibold">{title}</h2>
+              <button onClick={onToggleReadMore} className="text-gray-400 hover:text-white mt-0">
+                <X className="w-5 h-5" />
+              </button>
             </div>
-
-            {/* Title */}
-            <h2 className="text-xl font-semibold text-white mt-8">{title}</h2>
-            {/* Description */}
-            <p className="text-gray-300 text-sm">{description}</p>
-
-            {/* Read More Link */}
-            <button
-                onClick={toggleOpen}
-                className={cn(
-                    "text-sm font-medium transition-colors duration-200 flex items-center gap-1 w-fit cursor-pointer",
-                    `text-[${color}] hover:text-[${color}]/80`,
-                    "flex items-center"
-                )}
-            >
-                Read more →
-            </button>
-
-            {/* Full Description Modal */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.3 }}
-                        className={cn(
-                            "absolute top-0 left-0 w-full h-full bg-black/80 backdrop-blur-md rounded-xl p-6 flex flex-col text-white z-10 overflow-y-auto max-h-[80vh]",
-                            "bg-gray-900" // Added background color to the modal
-                        )}
-                    >
-                        <div className=" rounded-xl p-6 shadow-xl">
-                            <div className="flex justify-between items-start mb-4"> {/* added flex...items-start */}
-                                <h2 className="text-2xl font-semibold  text-white">{title}</h2>
-                                <button
-                                    onClick={toggleOpen}
-                                    className="text-gray-400 hover:text-white mt-0" //Added mt-0
-                                >
-                                    <X className="w-5 h-5" />
-                                </button>
-                            </div>
-                            <p className="text-gray-300 leading-relaxed whitespace-pre-line">{fullDescription}</p> {/* changed to text-gray-300 */}
-                            <button
-                                onClick={toggleOpen}
-                                className="mt-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md self-start"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
+            <div className="overflow-y-scroll pr-1 max-h-[calc(100%-3rem)]">
+              <p className="text-sm leading-relaxed whitespace-pre-line text-gray-300">{fullDescription}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 };
 
-const CardGrid = () => {
-    const cardData = [
-        {
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-activity"
-                >
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                </svg>
-            ),
-            title: "Title 1",
-            description: "Tailored to meet individual needs perfectly balanced.",
-            fullDescription: `This is the full description for card 1.  It can contain a lot more text and details than the short description.  This is an example of expanded content shown on Read More.
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            
-            Additional details can be added here.  This is a multi-line description to test how the card handles longer content. We want to make sure the text wraps correctly and that the modal is scrollable.
-            
-            More paragraphs can be included to simulate a very long description. The user should be able to scroll through this content without any issues.  The modal should expand vertically as needed, up to a maximum height.`,
-            readMoreLink: "#",
-        },
-        {
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-circle"
-                >
-                    <circle cx="12" cy="12" r="10" />
-                </svg>
-            ),
-            title: "Title 2",
-            description: "Tailored to meet individual needs perfectly balanced.",
-            fullDescription:
-                "This is the full description for card 2.  It can contain a lot more text and details than the short description. This is an example of expanded content shown on Read More.",
-            readMoreLink: "#",
-        },
-        {
-            icon: (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-zap"
-                >
-                    <path d="M13 2L3 14h9l-1 8 10-18H13z" />
-                </svg>
-            ),
-            title: "Title 3",
-            description: "Tailored to meet individual needs perfectly balanced.",
-            fullDescription:
-                "This is the full description for card 3. It can contain a lot more text and details than the short description. This is an example of expanded content shown on Read More.",
-            readMoreLink: "#",
-        },
-    ];
-
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-            {cardData.map((card, index) => (
-                <Card
-                    key={index}
-                    index={index}
-                    icon={card.icon}
-                    title={card.title}
-                    description={card.description}
-                    fullDescription={card.fullDescription}
-                    readMoreLink={card.readMoreLink}
-                />
-            ))}
-        </div>
-    );
-};
-
-export default CardGrid;
+export default Card;

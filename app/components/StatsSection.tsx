@@ -1,17 +1,10 @@
-"use client";
-import { useRef, useEffect, useState } from "react";
-import CountUp from "react-countup";
+// components/StatsSection.tsx
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import CountUp from "react-countup";
 
-const stats = [
-  { value: 350, label: "Advertisers" },
-  { value: 900, label: "Affiliates" },
-  { value: 6000, label: "Campaigns" },
-  { value: 15840, label: "Hours of Support" },
-];
-
-export default function StatsSection() {
+const StatsSection: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -21,12 +14,19 @@ export default function StatsSection() {
     }
   }, [inView, hasAnimated]);
 
+  const stats = [
+    { value: 100, label: "Advertisers" },
+    { value: 300, label: "Affiliates" },
+    { value: 2000, label: "Campaigns" },
+    { value: 10840, label: "Hours of Support" },
+  ];
+
   return (
     <section
       id="facts"
-      className="relative py-24 px-6 text-center bg-white overflow-hidden"
+      className={`relative py-24 px-6 text-center overflow-hidden font-sans ${isDarkMode ? "bg-gray-900" : "bg-white"}`}
       style={{
-        backgroundImage: `url('/your-world-map-bg.png')`,
+        backgroundImage: isDarkMode ? `url('/your-world-map-dark-bg.png')` : `url('/your-world-map-light-bg.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -39,30 +39,23 @@ export default function StatsSection() {
         viewport={{ once: true }}
         className="max-w-6xl mx-auto"
       >
-        <h2 className="text-4xl font-bold mb-2 text-black">FACTS</h2>
-        <div className="h-1 w-12 bg-yellow-400 mx-auto mb-4 rounded-full" />
-        <p className="text-lg text-gray-700 mb-12">
-          Let's take a look at the numbers
-        </p>
+        <h2 className={`text-4xl font-bold mb-2 ${isDarkMode ? "text-white" : "text-black"}`}>FACTS</h2>
+        <div className={`h-1 w-12 mx-auto mb-4 rounded-full ${isDarkMode ? "bg-yellow-300" : "bg-yellow-400"}`} />
+        <p className={`text-lg mb-12 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>Let's take a look at the numbers</p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
           {stats.map((stat, idx) => (
             <div key={idx}>
-              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">
-                {hasAnimated ? (
-                  <CountUp end={stat.value} duration={2.5} />
-                ) : (
-                  "0"
-                )}
-                +
+              <h3 className={`text-4xl font-extrabold mb-2 ${isDarkMode ? "text-yellow-400" : "text-yellow-500"}`}>
+                {hasAnimated ? <CountUp end={stat.value} duration={2.5} /> : "0"}+
               </h3>
-              <p className="text-lg font-semibold text-gray-800">
-                {stat.label}
-              </p>
+              <p className={`text-lg font-semibold ${isDarkMode ? "text-gray-200" : "text-gray-800"}`}>{stat.label}</p>
             </div>
           ))}
         </div>
       </motion.div>
     </section>
   );
-}
+};
+
+export default StatsSection;
