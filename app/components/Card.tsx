@@ -1,6 +1,8 @@
+
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
+
 function cn(...args: any[]): string {
   return args.filter(Boolean).join(' ');
 }
@@ -16,6 +18,7 @@ interface CardProps {
   isDarkMode: boolean;
   isReadMoreOpen: boolean;
   onToggleReadMore: () => void;
+  layout?: "text-over-image" | "image-top"; // New prop
 }
 
 const Card: React.FC<CardProps> = ({
@@ -29,6 +32,7 @@ const Card: React.FC<CardProps> = ({
   isDarkMode,
   isReadMoreOpen,
   onToggleReadMore,
+  layout = "text-over-image", // Default to current layout
 }) => {
   const colors = isDarkMode
     ? ['#EF4444', '#22C55E', '#ffec6b', '#F97316']
@@ -46,15 +50,22 @@ const Card: React.FC<CardProps> = ({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isReadMoreOpen, onToggleReadMore]);
 
+  // Base classes for both layouts
+  const baseCardClasses = cn(
+    "relative p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col overflow-hidden",
+    isDarkMode ? "bg-black/60 border border-gray-700" : "bg-black/50 border border-white/10",
+    "backdrop-blur-md"
+  );
+
   return (
     <div
       className={cn(
-        "relative p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col min-h-[400px] overflow-hidden bg-cover bg-center",
-        isDarkMode ? "bg-black/60 border border-gray-700" : "bg-black/50 border border-white/10",
-        "backdrop-blur-md"
+        baseCardClasses,
+        layout === "text-over-image" ? "min-h-[400px] bg-cover bg-center" : "min-h-[auto]"
       )}
-      style={{ backgroundImage: `url(${bgImage})` }}
+      style={layout === "text-over-image" ? { backgroundImage: `url(${bgImage})` } : {}}
     >
+      {/* Background overlay and decorative elements */}
       <div
         className="absolute -top-6 -left-6 w-32 h-32 rounded-full opacity-10 blur-2xl"
         style={{ backgroundColor: `${color}1A` }}
@@ -66,10 +77,20 @@ const Card: React.FC<CardProps> = ({
         {icon}
       </div>
 
+      {/* Conditional rendering for "image-top" layout */}
+      {layout === "image-top" && (
+        <div
+          className="w-full h-48 rounded-md mb-4 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgImage})` }}
+        ></div>
+      )}
+
+      {/* Content for both layouts */}
       <h2
         className={cn(
-          "text-xl font-semibold mt-16 mb-2 relative text-white drop-shadow-lg",
-          "bg-black/60 backdrop-blur-sm rounded-md px-2 py-1"
+          "text-xl font-semibold mb-2 relative text-white drop-shadow-lg",
+          "bg-black/60 backdrop-blur-sm rounded-md px-2 py-1",
+          layout === "text-over-image" ? "mt-16" : "mt-0" // Adjust margin based on layout
         )}
       >
         {title}

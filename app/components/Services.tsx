@@ -28,7 +28,7 @@ interface ServicesSectionProps {
       fullDescription:
         "From CRM automation to email marketing pipelines, we equip you with tools that reduce manual effort and scale faster.  Our automation tools are designed to be easy to use and integrate seamlessly with your existing systems.",
       readMoreLink: "#",
-      bgImage: 'https://images.unsplash.com/photo-1548372276-74815418f415?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      bgImage:'https://images.unsplash.com/photo-1602468432285-0fe26e8352ac?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' // New image
     },
     {
       icon: <BarChart4 className="w-6 h-6" />, // Color will be applied by parent
@@ -46,7 +46,7 @@ interface ServicesSectionProps {
       fullDescription:
         "Our engagement tools enable you to interact with your audience via chat, social platforms, and personalized follow-ups. We provide the tools and strategies you need to build lasting customer loyalty.",
       readMoreLink: "#",
-      bgImage: 'https://images.unsplash.com/photo-1531482615713-74a1a7e5b744?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      bgImage: 'https://images.unsplash.com/photo-1426023671131-18ce9c8d5f80?q=80&w=3274&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
   ];
 export default function ServicesSection({ isDarkMode }: ServicesSectionProps) {
@@ -106,6 +106,7 @@ export default function ServicesSection({ isDarkMode }: ServicesSectionProps) {
             readMoreLink={service.readMoreLink}
             bgImage={service.bgImage}
             isDarkMode={isDarkMode}
+            layout="image-top"
             isReadMoreOpen={openReadMoreIndex === index}
             onToggleReadMore={() => {
               setOpenReadMoreIndex(
