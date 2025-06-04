@@ -36,8 +36,8 @@ export default function FooterSection({ isDarkMode }: FooterSectionProps) {
         </div>
         <div>
           <h4 className="text-xl md:text-2xl font-bold mb-4">Contact</h4>
-          <p>Email: hello@avengersmedia.com</p>
-          <p>Phone: +1 1111 11 111 1</p>
+          <p>Email: admin@avengersmedia.in</p>
+          <p>Phone: +91 8310531595</p>
         </div>
         <div>
           <h4 className="text-xl md:text-2xl font-bold mb-4">Connect With Us</h4>

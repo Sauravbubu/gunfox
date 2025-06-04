@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import emailjs from "emailjs-com";
 
 interface ContactSectionProps {
   isDarkMode: boolean;
@@ -7,6 +8,12 @@ interface ContactSectionProps {
 
 export default function ContactSection({ isDarkMode }: ContactSectionProps) {
   const [userType, setUserType] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const SERVICE_ID = "service_gp5d5ln";
+  const TEMPLATE_ID = "template_407oyq8";
+  const PUBLIC_KEY = "1a6kCqz97xf5lqTMc";
 
   return (
     <section
@@ -17,6 +24,22 @@ export default function ContactSection({ isDarkMode }: ContactSectionProps) {
           : "bg-gradient-to-br from-white/10 to-white/5"
       } backdrop-blur-lg`}
     >
+      {/* Success Popup */}
+      {showSuccess && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
+          <div className="bg-white rounded-xl shadow-xl p-8 max-w-sm w-full text-center">
+            <h4 className="text-2xl font-bold mb-2 text-green-600">Thank you!</h4>
+            <p className="mb-4 text-gray-700">Your message has been sent successfully.</p>
+            <button
+              className="mt-2 px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
+              onClick={() => setShowSuccess(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -46,17 +69,24 @@ export default function ContactSection({ isDarkMode }: ContactSectionProps) {
 
         <form
           className="space-y-6 text-left"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const data = Object.fromEntries(formData.entries());
-            console.log("Form Data:", data);
-
-            setTimeout(() => {
-              alert("Your message has been sent successfully!");
-              e.currentTarget.reset();
-              setUserType(""); // Reset userType after submission
-            }, 500);
+            setLoading(true);
+            const form = e.currentTarget;
+            emailjs
+              .sendForm(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
+              .then(
+                () => {
+                  setShowSuccess(true);
+                  form.reset();
+                  setUserType("");
+                },
+                (error) => {
+                  alert("Failed to send message. Please try again.");
+                  console.error(error);
+                }
+              )
+              .finally(() => setLoading(false));
           }}
         >
           <div className="space-y-4">
@@ -78,28 +108,9 @@ export default function ContactSection({ isDarkMode }: ContactSectionProps) {
               >
                 I am a...
               </option>
-              <option
-                value="publisher"
-                className={
-                  isDarkMode
-                    ? "hover:bg-gray-600 text-gray-100"
-                    : "hover:bg-gray-100/80 text-gray-900"
-                }
-              >
-                Publisher
-              </option>
-              <option
-                value="advertiser"
-                className={
-                  isDarkMode
-                    ? "hover:bg-gray-600 text-gray-100"
-                    : "hover:bg-gray-100/80 text-gray-900"
-                }
-              >
-                Advertiser
-              </option>
+              <option value="publisher">Publisher</option>
+              <option value="advertiser">Advertiser</option>
             </select>
-
             <input
               type="text"
               name="name"
@@ -147,13 +158,14 @@ export default function ContactSection({ isDarkMode }: ContactSectionProps) {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className={`w-full px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg font-semibold text-lg transition-all duration-300 ${
               isDarkMode
                 ? "bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-white"
                 : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
             }`}
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </motion.div>
