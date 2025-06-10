@@ -31,13 +31,13 @@ interface ServicesSectionProps {
       bgImage:'https://images.unsplash.com/photo-1602468432285-0fe26e8352ac?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' // New image
     },
     {
-      icon: <BarChart4 className="w-6 h-6" />, // Color will be applied by parent
-      title: "Data Analytics",
-      description: "Our data analytics services help you gain valuable insights from your data.  We use advanced techniques to identify trends, patterns, and opportunities that can help you make better business decisions.",
+      icon: <BarChart4 className="w-6 h-6" />, // You can use a more appropriate icon if you like
+      title: "Website & Web App Development",
+      description: "We craft stunning, high-performance websites and web apps with breathtaking UI and seamless user experience.",
       fullDescription:
-        "We help you collect, analyze, and act on data-driven insights to make better decisions for your campaigns and ROI.  Our team of data scientists and analysts will provide you with clear, actionable recommendations.",
+        "Our team specializes in building modern, responsive websites and web applications that not only look amazing but also deliver exceptional performance. From landing pages to complex dashboards, we use the latest technologies and design trends to ensure your digital presence stands out and delights your users.",
       readMoreLink: "#",
-      bgImage: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       icon: <MessageCircle className="w-6 h-6" />, // Color will be applied by parent
