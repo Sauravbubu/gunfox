@@ -13,9 +13,12 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  @apply scroll-smooth bg-gradient-to-br from-white to-gray-100 font-sans;
-  background: url('/blurry-gradient-haikei.svg') no-repeat center center fixed;
-  background-size: cover;
+  /* @apply scroll-smooth bg-gradient-to-br from-white to-gray-100 font-sans; */
+  /* background: url('/blurry-gradient-haikei.svg') no-repeat center center fixed; */
+  /* background-size: cover; */
+  /* background: var(--background); */
+  /* color: var(--foreground); */
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 :root {
@@ -51,10 +54,4 @@ body {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
