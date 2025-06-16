@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gnufox",
-  description: "One stop solution for all your Tech needs",
+  title: "Avengers Media",
+  description: "One stop solution for all your affiliate marketing needs",
 };
 
 export default function RootLayout({
