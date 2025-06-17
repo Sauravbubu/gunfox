@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Briefcase, Code, Users, Mail, Phone, MapPin, Menu, X, ChevronRight, Sun, Moon, Lightbulb, TrendingUp, Handshake, Award, Target, LayoutGrid, Rocket, Zap } from 'lucide-react';
-
+import { Briefcase, Code, Users, Mail, Phone, MapPin, Menu, X, ChevronRight, Sun, Moon, Lightbulb, TrendingUp, Handshake, Award, Target, LayoutGrid, Rocket, Zap, Leaf, Laptop, Megaphone, DollarSign } from 'lucide-react';
+import heroBg from '../public/hero-bg.jpg'; // Adjust the path as necessary
+import Image from 'next/image';
 // Main App component
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,34 +79,45 @@ export default function App() {
 
       <main>
         {/* Hero Section */}
-        <section id="home" className="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        <section id="home" className="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden perspective-1000">
           {/* Background image for Hero section */}
-          <img
-            src="https://placehold.co/1920x1080/0e1b30/d3d3d3?text=Tech+Background"
+          <Image
+            src="/hero-bg.jpg"
             alt="Abstract tech background"
-            className="absolute inset-0 z-0 w-full h-full object-cover opacity-30 dark:opacity-20 transition-opacity duration-300"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-30 dark:opacity-20 transition-opacity duration-300 animate-zoom-in z-0"
+          />
+          {/* <img
+            src={heroBg}
+            alt="Abstract tech background"
+            className="absolute inset-0 z-0 w-full h-full object-cover opacity-30 dark:opacity-20 transition-opacity duration-300 animate-zoom-in"
             // You can add an onerror handler for production images if needed
             // onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1920x1080/000000/FFFFFF?text=Image+Load+Error'; }}
-          />
+          /> */}
           {/* Background animation/gradient */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-950 to-indigo-900 opacity-90 dark:from-blue-200 dark:to-indigo-300 dark:opacity-90 transition-colors duration-300"></div>
+          {/* <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-950 to-indigo-900 opacity-90 dark:from-blue-200 dark:to-indigo-300 dark:opacity-90 transition-colors duration-300"></div> */}
+<div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-950 to-indigo-900 opacity-0 dark:from-blue-200 dark:to-indigo-300 dark:opacity-40 transition-colors duration-300"></div>
+
+          {/* Animated Blob Elements - now with more varied movement */}
           <div className="absolute inset-0 z-0 flex items-center justify-center">
-            <div className="w-96 h-96 rounded-full bg-blue-600 opacity-10 blur-3xl animate-blob -top-10 left-10 dark:bg-blue-300"></div>
-            <div className="w-96 h-96 rounded-full bg-emerald-500 opacity-10 blur-3xl animate-blob animation-delay-2000 top-20 right-10 dark:bg-emerald-300"></div>
-            <div className="w-96 h-96 rounded-full bg-purple-600 opacity-10 blur-3xl animate-blob animation-delay-4000 bottom-10 left-10 dark:bg-purple-300"></div>
+            <div className="w-96 h-96 rounded-full bg-blue-600 opacity-10 blur-3xl animate-blob -top-10 left-10 dark:bg-blue-300 animation-delay-0"></div>
+            <div className="w-96 h-96 rounded-full bg-emerald-500 opacity-10 blur-3xl animate-blob animation-delay-2000 top-20 right-10 dark:bg-emerald-300 animation-speed-slow"></div>
+            <div className="w-96 h-96 rounded-full bg-purple-600 opacity-10 blur-3xl animate-blob animation-delay-4000 bottom-10 left-10 dark:bg-purple-300 animation-speed-medium"></div>
+            <div className="w-80 h-80 rounded-full bg-orange-400 opacity-8 blur-3xl animate-blob-reverse animation-delay-1000 top-50 left-50 dark:bg-orange-300 animation-speed-fast"></div>
           </div>
 
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-elegant font-extrabold leading-tight text-white dark:text-gray-900 mb-6 animate-fade-in-up">
+          <div className="relative z-10 max-w-4xl mx-auto transform-gpu animate-hero-text">
+            <h1 className="text-5xl md:text-7xl font-elegant font-extrabold leading-tight text-white dark:text-gray-900 mb-6">
               Innovate. Transform. Succeed.
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 dark:text-gray-700 mb-10 animate-fade-in-up animation-delay-500">
+            <p className="text-lg md:text-xl text-gray-300 dark:text-gray-700 mb-10">
               Your trusted partner in navigating the complex world of technology,
               delivering cutting-edge solutions for a digital future.
             </p>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-full shadow-lg hover:from-emerald-600 hover:to-teal-700 transition duration-300 ease-in-out transform hover:scale-105 animate-fade-in-up animation-delay-1000"
+              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-full shadow-lg hover:from-emerald-600 hover:to-teal-700 transition duration-300 ease-in-out transform hover:scale-105"
             >
               Get a Free Consultation
               <ChevronRight className="ml-2" size={20} />
@@ -178,53 +190,37 @@ export default function App() {
         <section id="services" className="py-20 bg-gray-900 dark:bg-gray-100 px-6 transition-colors duration-300 ease-in-out">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-4xl font-elegant font-bold text-center text-emerald-400 dark:text-emerald-600 mb-12">Our Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {/* Service Card 1 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+              {/* Service Card 1: Environment Engineering */}
               <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <Code className="text-teal-400 dark:text-teal-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Software Development</h3>
+                <Leaf className="text-teal-400 dark:text-teal-600 mb-6" size={60} strokeWidth={1.5} />
+                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Environment Engineering</h3>
                 <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Crafting bespoke software solutions tailored to your business needs, from web and mobile apps to complex enterprise systems.
+                  Sustainable solutions for environmental challenges, leveraging technology for a greener future.
                 </p>
               </div>
-              {/* Service Card 2 */}
+              {/* Service Card 2: IT Strategy & Product development */}
               <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <Users className="text-indigo-400 dark:text-indigo-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">IT Strategy & Consulting</h3>
+                <Laptop className="text-indigo-400 dark:text-indigo-600 mb-6" size={60} strokeWidth={1.5} />
+                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">IT Strategy & Product Development</h3>
                 <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Guiding your digital transformation journey with expert strategic planning, technology roadmaps, and architecture design.
+                  Crafting robust IT strategies and developing innovative products from concept to launch.
                 </p>
               </div>
-              {/* Service Card 3 */}
+              {/* Service Card 3: Media and advertisement */}
               <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <Briefcase className="text-purple-400 dark:text-purple-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Cloud Solutions</h3>
+                <Megaphone className="text-purple-400 dark:text-purple-600 mb-6" size={60} strokeWidth={1.5} />
+                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Media and Advertisement</h3>
                 <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Implementing scalable and secure cloud infrastructure (AWS, Azure, GCP) for optimal performance and cost efficiency.
+                  Creative and data-driven media and advertising strategies for maximum impact and reach.
                 </p>
               </div>
-              {/* Service Card 4 */}
+              {/* Service Card 4: Business Development and startup funding support */}
               <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <Target className="text-red-400 dark:text-red-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Cybersecurity</h3>
+                <DollarSign className="text-red-400 dark:text-red-600 mb-6" size={60} strokeWidth={1.5} />
+                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Business Development & Startup Funding Support</h3>
                 <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Protecting your digital assets with robust security frameworks, threat detection, and compliance solutions.
-                </p>
-              </div>
-              {/* Service Card 5 */}
-              <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <LayoutGrid className="text-yellow-400 dark:text-yellow-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">Data Analytics & AI</h3>
-                <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Unlocking insights from your data and implementing AI/ML solutions to drive smarter business decisions.
-                </p>
-              </div>
-              {/* Service Card 6 */}
-              <div className="bg-gray-950 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center border border-gray-800 hover:border-teal-500 dark:bg-gray-50 dark:border-gray-200 dark:hover:border-emerald-600 transition duration-300 transform hover:scale-105">
-                <Rocket className="text-cyan-400 dark:text-cyan-600 mb-6" size={60} strokeWidth={1.5} />
-                <h3 className="text-2xl font-semibold text-white dark:text-gray-900 mb-4">DevOps & Automation</h3>
-                <p className="text-gray-400 dark:text-gray-600 leading-relaxed">
-                  Streamlining your development and operations workflows for faster delivery and enhanced reliability.
+                  Strategic business growth and comprehensive support for startup funding and expansion.
                 </p>
               </div>
             </div>

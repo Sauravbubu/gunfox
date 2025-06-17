@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      perspective: {
+        1000: '1000px',
+      },
       keyframes: {
         gradientShift: {
           "0%, 100%": { backgroundPosition: "0% 50%" },
