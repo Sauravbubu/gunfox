@@ -15,6 +15,12 @@ module.exports = {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
+        colors: {
+        gnufox: {
+          DEFAULT: '#F28C28',
+          dark: '#d9761e',
+        },
+      },
       },
       animation: {
         gradient: "gradientShift 6s ease infinite",
