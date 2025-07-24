@@ -5,6 +5,8 @@ import { Briefcase, Code, Users, Mail, Phone, MapPin, Menu, X, ChevronRight, Sun
 import * as THREE from 'three';
 import AnimatedShape from './components/3dshape';
 import Card3DEffect from './components/3dCard';
+import Image from 'next/image';
+import  logo from "./gnufox-logo.png";
 type CardData = {
   title: string;
   description: string;
@@ -455,8 +457,7 @@ const canvasRef = useRef<HTMLCanvasElement | null>(null);
       <header className="fixed w-full z-50 bg-gray-950 bg-opacity-90 shadow-lg py-4 dark:bg-gray-100 dark:bg-opacity-90 transition-colors duration-300 ease-in-out">
         <nav className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <span className="text-3xl font-bold text-orange-400 dark:text-orange-600 font-inter">Gnufox</span>
-            <span className="text-xl text-gray-400 dark:text-gray-600 hidden sm:inline">Consultancy</span>
+            <Image src={logo} alt="Gnufox Logo" width={300} height={50} className="rounded-full" /> 
           </div>
           <div className="hidden md:flex space-x-8 items-center">
             {renderNavLink('home', 'Home')}
