@@ -466,23 +466,23 @@ const canvasRef = useRef<HTMLCanvasElement | null>(null);
             {renderNavLink('testimonials', 'Testimonials')}
             {renderNavLink('contact', 'Contact')}
             {/* Dark/Light mode toggle button */}
-            <button
+            {/* <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="ml-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600 dark:bg-gray-300 dark:hover:bg-gray-400 text-gray-200 dark:text-gray-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+            </button> */}
           </div>
           <div className="md:hidden flex items-center">
             {/* Dark/Light mode toggle button for mobile */}
-            <button
+            {/* <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="mr-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600 dark:bg-gray-300 dark:hover:bg-gray-400 text-gray-200 dark:text-gray-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+            </button> */}
             <button onClick={toggleMenu} className="text-gray-300 hover:text-orange-400 dark:text-gray-700 dark:hover:text-orange-600 focus:outline-none">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
