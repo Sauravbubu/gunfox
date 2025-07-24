@@ -17,21 +17,25 @@ const serviceCards: CardData[] = [
     title: 'Environment Engineering',
     description: 'Sustainable solutions for environmental challenges, leveraging technology for a greener future.',
     color: '#0f172a', // Tailwind gray-950
+    textColor: '#ffffff', // Tailwind white
   },
   {
     title: 'IT Strategy & Product Development',
     description: 'Crafting robust IT strategies and developing innovative products from concept to launch.',
     color: '#0f172a',
+    textColor: '#ffffff', 
   },
   {
     title: 'Media and Advertisement',
     description: 'Creative and data-driven media and advertising strategies for maximum impact and reach.',
     color: '#0f172a',
+    textColor: '#ffffff',
   },
   {
     title: 'Business Development & Funding',
     description: 'Strategic growth and comprehensive support for startup funding and expansion.',
     color: '#0f172a',
+    textColor: '#ffffff',
   }
 ];
 

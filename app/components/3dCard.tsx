@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 type CardData = {
   title: string;
   color?: string;
+  textColor?: string;
 };
 
 type Props = {
