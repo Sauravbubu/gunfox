@@ -7,6 +7,7 @@ type CardData = {
   title: string;
   color?: string;
   textColor?: string;
+  description: string;
 };
 
 type Props = {
@@ -97,15 +98,17 @@ cards.forEach((card, i) => {
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
 
-      cardMeshes.forEach((card) => {
-        if (intersects.includes(card)) {
-          card.rotation.y += (0.1 - card.rotation.y) * 0.1;
-          card.scale.set(1.05, 1.05, 1.05);
-        } else {
-          card.rotation.y += (0 - card.rotation.y) * 0.1;
-          card.scale.set(1, 1, 1);
-        }
-      });
+     cardMeshes.forEach((card) => {
+  const isHovered = intersects.some((intersect) => intersect.object === card);
+
+  if (isHovered) {
+    card.rotation.y += (0.1 - card.rotation.y) * 0.1;
+    card.scale.set(1.05, 1.05, 1.05);
+  } else {
+    card.rotation.y += (0 - card.rotation.y) * 0.1;
+    card.scale.set(1, 1, 1);
+  }
+});
 
       controls.update();
       renderer.render(scene, camera);

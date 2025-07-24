@@ -59,13 +59,17 @@ export default function App() {
   };
 
   // Ref for the 3D canvas
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
   const servicesCanvasRef = useRef(null);
 
   // Three.js variables
-  const scene = useRef(null);
-  const camera = useRef(null);
-  const renderer = useRef(null);
+  const renderer = useRef<THREE.WebGLRenderer | null>(null);
+const camera = useRef<THREE.PerspectiveCamera | null>(null);
+const scene = useRef<THREE.Scene | null>(null);
+const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // const scene = useRef(null);
+  // const camera = useRef(null);
+  // const renderer = useRef(null);
   const objects = useRef([]); // Array to hold 3D objects
   const mouse = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
@@ -423,7 +427,7 @@ export default function App() {
     scene.add(point);
 
     // Animation loop
-    let frameId;
+    let frameId:any;
     const animate = () => {
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
