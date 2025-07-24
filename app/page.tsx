@@ -702,12 +702,12 @@ const canvasRef = useRef<HTMLCanvasElement | null>(null);
                   {/* Placeholder profile image for testimonial */}
                   <img
                     src="https://placehold.co/48x48/7e7e7e/ffffff?text=AB"
-                    alt="Profile of Alice Brown, CEO of Tech Solutions Inc."
+                    alt="Profile of Asit Nayak, Officer at Chandbali NAC."
                     className="w-12 h-12 rounded-full mr-4 object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-white dark:text-gray-900">Alice Brown</p>
-                    <p className="text-gray-500 dark:text-gray-500 text-sm">CEO, Tech Solutions Inc.</p>
+                    <p className="font-semibold text-white dark:text-gray-900">Asit Nayak</p>
+                    <p className="text-gray-500 dark:text-gray-500 text-sm">Officer, Chandbali NAC.</p>
                   </div>
                 </div>
               </div>
@@ -720,12 +720,12 @@ const canvasRef = useRef<HTMLCanvasElement | null>(null);
                   {/* Placeholder profile image for testimonial */}
                   <img
                     src="https://placehold.co/48x48/7e7e7e/ffffff?text=CJ"
-                    alt="Profile of Chris Johnson, CTO of Global Innovations"
+                    alt="Profile of Deepak Singh, Officer at BMC"
                     className="w-12 h-12 rounded-full mr-4 object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-white dark:text-gray-900">Chris Johnson</p>
-                    <p className="text-gray-500 dark:text-gray-500 text-sm">CTO, Global Innovations</p>
+                    <p className="font-semibold text-white dark:text-gray-900">Deepak Singh</p>
+                    <p className="text-gray-500 dark:text-gray-500 text-sm">Officer, BMC</p>
                   </div>
                 </div>
               </div>
@@ -750,11 +750,11 @@ const canvasRef = useRef<HTMLCanvasElement | null>(null);
                   </div>
                   <div className="flex items-center text-gray-300 dark:text-gray-700">
                     <Phone className="text-orange-400 dark:text-orange-600 mr-4" size={24} />
-                    <span>+91 12345 67890</span> {/* Placeholder phone number */}
+                    <span>+91 7205319320</span> {/* Placeholder phone number */}
                   </div>
                   <div className="flex items-center text-gray-300 dark:text-gray-700">
                     <MapPin className="text-orange-400 dark:text-orange-600 mr-4" size={24} />
-                    <span>Brahmapur, Odisha, India</span>
+                    <span>Bhubaneswar, Odisha, India</span>
                   </div>
                 </div>
               </div>
